@@ -128,6 +128,11 @@ p { color: var(--c-mist); font-size: 1.02rem; }
 .topbar-right { display: flex; gap: 18px; align-items: center; }
 .topbar-right .gold-dot { width: 6px; height: 6px; background: var(--c-gold); border-radius: 50%; display: inline-block; box-shadow: 0 0 10px var(--c-gold); }
 
+@media (max-width: 767px) {
+  .topbar {
+    display: none !important;
+  }
+}
 /* =========================================================
    HEADER / NAV
    ========================================================= */
