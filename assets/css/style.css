@@ -1620,3 +1620,205 @@ section { padding: 110px 0; position: relative; }
 ::-webkit-scrollbar-track { background: var(--c-jet); }
 ::-webkit-scrollbar-thumb { background: var(--c-red); }
 ::-webkit-scrollbar-thumb:hover { background: var(--c-gold); }
+
+/* =========================================================
+   COMPREHENSIVE MOBILE & TABLET RESPONSIVE SYSTEM
+   ========================================================= */
+
+/* Tablet Optimization (Max 992px) */
+@media (max-width: 992px) {
+  .nav {
+    padding: 12px 20px;
+  }
+
+  .nav-links {
+    gap: 16px;
+  }
+
+  .hero-inner {
+    margin-top: 0;
+    padding: 60px 20px;
+  }
+
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Gallery Grid Tablet */
+  .lawn-gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+}
+
+/* Mobile Devices (Max 767px) */
+@media (max-width: 767px) {
+  /* 1. Global Spacing & Typography */
+  .container {
+    padding: 0 18px;
+  }
+
+  section {
+    padding: 60px 0;
+  }
+
+  .topbar {
+    display: none !important;
+  }
+
+  h1 {
+    font-size: 2rem;
+    line-height: 1.2;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  h3 {
+    font-size: 1.2rem;
+  }
+
+  .section-lead {
+    font-size: 0.95rem;
+    margin-bottom: 36px;
+  }
+
+  /* 2. Hero Section */
+  .hero {
+    min-height: auto;
+    padding: 60px 0;
+  }
+
+  .hero-inner {
+    margin-top: 0;
+    padding: 20px 0;
+  }
+
+  .hero-meta {
+    gap: 20px;
+    margin-top: 36px;
+    padding-top: 24px;
+  }
+
+  .hero-meta-item .num {
+    font-size: 1.6rem;
+  }
+
+  /* 3. Cards & Grids */
+  .services-grid,
+  .why-grid,
+  .industries-grid,
+  .testi-grid,
+  .blog-grid,
+  .certs-strip {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .service-card {
+    padding: 28px 20px;
+  }
+
+  /* 4. Gallery Section & Touch-Friendly Filters */
+  .gallery-page-section,
+  .lawn-gallery-section {
+    padding: 40px 0 60px;
+  }
+
+  .gallery-header {
+    margin-bottom: 20px;
+  }
+
+  .gallery-filters {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    gap: 8px;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    scrollbar-width: none;
+  }
+
+  .gallery-filters::-webkit-scrollbar {
+    display: none;
+  }
+
+  .filter-btn,
+  .gallery-filter-btn {
+    white-space: nowrap;
+    flex-shrink: 0;
+    padding: 8px 14px;
+    font-size: 0.72rem;
+  }
+
+  .lawn-gallery-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .lawn-gallery-card {
+    aspect-ratio: 16 / 10;
+  }
+
+  .lawn-gallery-card .card-hover-tag {
+    opacity: 1;
+    transform: translateY(0);
+    font-size: 0.65rem;
+  }
+
+  /* 5. Lightbox Modal */
+  .lightbox-modal {
+    padding: 16px;
+  }
+
+  .lightbox-img {
+    max-height: 65vh;
+  }
+
+  .lightbox-close {
+    top: -36px;
+    right: 4px;
+    font-size: 1.8rem;
+  }
+
+  /* 6. Forms & Process */
+  .form-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .process {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  /* 7. Footer & Floating CTA */
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+  }
+
+  .float-actions {
+    right: 14px;
+    bottom: 14px;
+    gap: 10px;
+  }
+
+  .float-btn {
+    width: 48px;
+    height: 48px;
+  }
+
+  .float-btn svg {
+    width: 22px;
+    height: 22px;
+  }
+}
