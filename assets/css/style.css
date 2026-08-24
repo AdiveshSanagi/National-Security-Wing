@@ -219,13 +219,14 @@ p { color: var(--c-mist); font-size: 1.02rem; }
 .nav-cta {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
-  padding: 8px 16px;
+  gap: 8px;
+  padding: 8px;
   background: var(--c-red);
   color: var(--c-white);
   font-weight: 600;
   font-size: 0.82rem;
   letter-spacing: 0.14em;
+  text-align: center;
   text-transform: uppercase;
   border: 1px solid var(--c-red);
   transition: all .3s ease;
@@ -1350,27 +1351,46 @@ a.cert-badge:hover {
 
 /* Thumbnail Wrapper & Zoom Effect */
 .cert-thumb-wrapper {
-  position: relative;
   width: 100%;
-  aspect-ratio: 4 / 3; /* Standard document ratio */
-  background: #000;
+  aspect-ratio: 4 / 3; /* Fixed landscape frame matching standard cert cards */
+  height: 200px;       /* Fixed height ensures all cards stay aligned */
   overflow: hidden;
+  position: relative;
+  background: #111;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
 }
-
 .cert-thumb-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: top center;
-  transition: transform 0.4s ease, opacity 0.4s ease;
-  opacity: 0.85;
+  object-position: center 20%; /* Centers the important top portion of the certificate */
+  display: block;
+  transition: transform 0.4s ease;
 }
 
-.cert-card:hover .cert-thumb-img {
-  transform: scale(1.05);
-  opacity: 0.5;
+.cert-card {
+  display: flex;
+  flex-direction: column;
+  background: #181818;
+  border: 1px solid var(--c-line);
+  border-radius: 8px;
+  overflow: hidden;
+  height: 100%;
+  text-decoration: none;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+.cert-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--c-gold);
 }
 
+.cert-card-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
 /* Hover Overlay Button */
 .cert-overlay {
   position: absolute;
@@ -1690,4 +1710,31 @@ a.cert-badge:hover {
   .leadership-two-grid {
     grid-template-columns: 1fr;
   }
+}
+
+
+
+/* Specific container frame for the rifle certificate */
+.rifle-wrapper {
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  position: relative;
+  background: var(--c-black);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* If the raw file is horizontal/sideways, rotate it upright inside the preview */
+.rifle-img {
+  width: 133% !important; /* Counteract aspect ratio collapse on 90deg turn */
+  height: auto !important;
+  max-width: none !important;
+  transform: rotate(90deg); /* Change to -90deg if it is facing upside-down */
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.cert-card-rifle:hover .rifle-img {
+  transform: rotate(90deg) scale(1.05);
 }
