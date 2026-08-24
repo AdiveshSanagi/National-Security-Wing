@@ -323,6 +323,122 @@
         gap: 8px;
       }
     }
+
+    /* =========================================================
+   GALLERY PAGE - MOBILE & TABLET RESPONSIVE SYSTEM
+   ========================================================= */
+
+/* Tablet Optimization (Max 992px) */
+@media (max-width: 992px) {
+  .nav {
+    padding: 14px 20px;
+  }
+
+  .nav-links {
+    gap: 16px;
+  }
+
+  .gallery-page-section {
+    padding: 40px 0 70px;
+  }
+
+  .lawn-gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+}
+
+/* Mobile Devices (Max 767px) */
+@media (max-width: 767px) {
+  .topbar {
+    display: none !important;
+  }
+
+  .container {
+    padding: 0 16px;
+  }
+
+  .gallery-header {
+    margin-bottom: 22px;
+  }
+
+  .gallery-heading {
+    font-size: 1.5rem;
+  }
+
+  .gallery-subtext {
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
+
+  /* Horizontal swipeable pill filter on mobile */
+  .gallery-filters {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    gap: 8px;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    scrollbar-width: none; /* Hide scrollbar for Firefox */
+  }
+
+  .gallery-filters::-webkit-scrollbar {
+    display: none; /* Hide scrollbar for Chrome/Safari */
+  }
+
+  .filter-btn {
+    white-space: nowrap;
+    flex-shrink: 0;
+    padding: 8px 14px;
+    font-size: 0.72rem;
+  }
+
+  /* Single Column Card Stack */
+  .lawn-gallery-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .lawn-gallery-card {
+    aspect-ratio: 16 / 10;
+    border-radius: 4px;
+  }
+
+  /* Always show image category tag on touch screens */
+  .lawn-gallery-card .card-hover-tag {
+    opacity: 1;
+    transform: translateY(0);
+    font-size: 0.65rem;
+    padding: 4px 8px;
+  }
+
+  /* Mobile Lightbox Modal */
+  .lightbox-modal {
+    padding: 16px;
+  }
+
+  .lightbox-content {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .lightbox-img {
+    max-height: 65vh;
+    border-radius: 4px;
+  }
+
+  .lightbox-caption {
+    font-size: 0.78rem;
+    margin-top: 10px;
+  }
+
+  .lightbox-close {
+    top: -36px;
+    right: 4px;
+    font-size: 1.8rem;
+  }
+}
   </style>
 </head>
 <body>
