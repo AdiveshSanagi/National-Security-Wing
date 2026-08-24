@@ -1712,29 +1712,67 @@ a.cert-badge:hover {
   }
 }
 
-
-
-/* Specific container frame for the rifle certificate */
-.rifle-wrapper {
-  aspect-ratio: 3 / 4;
-  overflow: hidden;
-  position: relative;
-  background: var(--c-black);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+/* Mobile Toggle Icon */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 26px;
+  height: 18px;
+  cursor: pointer;
+  z-index: 101;
 }
 
-/* If the raw file is horizontal/sideways, rotate it upright inside the preview */
-.rifle-img {
-  width: 133% !important; /* Counteract aspect ratio collapse on 90deg turn */
-  height: auto !important;
-  max-width: none !important;
-  transform: rotate(90deg); /* Change to -90deg if it is facing upside-down */
-  object-fit: cover;
-  transition: transform 0.4s ease;
+.nav-toggle span {
+  display: block;
+  height: 2px;
+  width: 100%;
+  background: var(--c-gold);
+  border-radius: 2px;
+  transition: 0.3s;
 }
 
-.cert-card-rifle:hover .rifle-img {
-  transform: rotate(90deg) scale(1.05);
+/* Mobile Dropdown & Dropup via CSS */
+@media (max-width: 992px) {
+  .nav-toggle {
+    display: flex;
+  }
+
+  .nav-links {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: var(--c-navy-deep);
+    border-bottom: 1px solid var(--c-line);
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease-in-out;
+  }
+
+  .nav-links a {
+    padding: 12px 24px;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.08);
+    display: block;
+  }
+
+  /* When Checkbox is Checked -> Drop Down */
+  #nav-check:checked ~ .nav-links {
+    max-height: 480px;
+  }
+
+  /* Hamburger to X Transform */
+  #nav-check:checked ~ .nav-toggle span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+  #nav-check:checked ~ .nav-toggle span:nth-child(2) {
+    opacity: 0;
+  }
+  #nav-check:checked ~ .nav-toggle span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
 }
+
