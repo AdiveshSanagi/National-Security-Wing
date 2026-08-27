@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gallery | National Security Wing (NSW)</title>
+  <title>Operational Gallery | National Security Wing (NSW)</title>
   <link rel="manifest" href="manifest.json">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -75,20 +75,16 @@
     .topbar-right { display: flex; gap: 18px; align-items: center; }
     .gold-dot { width: 6px; height: 6px; background: var(--c-gold); border-radius: 50%; display: inline-block; box-shadow: 0 0 10px var(--c-gold); }
 
-    @media (max-width: 767px) {
-      .topbar { display: none !important; }
-    }
-
-    /* Site Header
+    /* Site Header */
     .site-header {
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(6, 18, 41, 0.92);
+      background: rgba(6, 18, 41, 0.94);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
       border-bottom: 1px solid var(--c-line);
-    } */
+    }
     .nav {
       display: flex;
       align-items: center;
@@ -96,11 +92,13 @@
       padding: 16px 28px;
       max-width: var(--container);
       margin: 0 auto;
+      position: relative;
     }
     .brand {
       display: flex;
       align-items: center;
       gap: 14px;
+      z-index: 1001;
     }
     .brand-mark {
       width: 44px; height: 44px;
@@ -110,6 +108,7 @@
       place-items: center;
       background: radial-gradient(circle at 30% 30%, var(--c-red), var(--c-red-deep));
       overflow: hidden;
+      flex-shrink: 0;
     }
     .brand-mark img { width: 100%; height: 100%; object-fit: contain; }
     .brand-name {
@@ -155,6 +154,27 @@
       border-color: var(--c-gold);
     }
 
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 28px;
+      height: 20px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      z-index: 1001;
+    }
+    .nav-toggle span {
+      display: block;
+      height: 2px;
+      width: 100%;
+      background: var(--c-gold);
+      border-radius: 2px;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
     /* Gallery Section */
     .gallery-page-section {
       background: var(--c-navy-deep);
@@ -181,16 +201,16 @@
     /* Category Filter Tabs */
     .gallery-filters {
       display: flex;
-      gap: 12px;
+      gap: 10px;
       flex-wrap: wrap;
-      margin-bottom: 28px;
+      margin-bottom: 32px;
     }
     .filter-btn {
-      padding: 8px 18px;
+      padding: 8px 16px;
       background: rgba(255, 255, 255, 0.04);
       border: 1px solid var(--c-line);
       color: var(--c-mist);
-      font-size: 0.78rem;
+      font-size: 0.75rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
       font-weight: 600;
@@ -204,7 +224,7 @@
       border-color: var(--c-red);
     }
 
-    /* Strict 3-Column Wall Grid */
+    /* 3-Column Wall Grid */
     .lawn-gallery-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -219,6 +239,10 @@
       position: relative;
       cursor: pointer;
       border: 1px solid rgba(255, 255, 255, 0.04);
+      transition: border-color 0.3s ease;
+    }
+    .lawn-gallery-card:hover {
+      border-color: var(--c-gold);
     }
 
     .lawn-gallery-card.hidden {
@@ -234,7 +258,7 @@
     }
 
     .lawn-gallery-card:hover img {
-      transform: scale(1.04);
+      transform: scale(1.05);
       filter: brightness(1.08);
     }
 
@@ -242,13 +266,13 @@
       position: absolute;
       bottom: 12px;
       left: 12px;
-      background: rgba(6, 18, 41, 0.85);
+      background: rgba(6, 18, 41, 0.9);
       border: 1px solid var(--c-line);
       color: var(--c-gold);
-      font-size: 0.7rem;
+      font-size: 0.68rem;
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      padding: 4px 10px;
+      padding: 5px 12px;
       pointer-events: none;
       opacity: 0;
       transform: translateY(6px);
@@ -307,143 +331,100 @@
     }
     .lightbox-close:hover { color: var(--c-gold); }
 
-    /* Responsive Breakdown */
-    @media (max-width: 900px) {
-      .lawn-gallery-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 12px;
+    /* Tablet Responsive */
+    @media (max-width: 992px) {
+      .topbar { display: none !important; }
+      .nav { padding: 14px 20px; }
+      .nav-toggle { display: flex; }
+      
+      .nav-links {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        width: 100%;
+        background: #061229;
+        border-bottom: 1px solid var(--c-line);
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding: 0 20px;
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        visibility: hidden;
+        transition: max-height 0.35s ease, opacity 0.25s ease, visibility 0.25s ease;
       }
+      .nav-links.is-open {
+        max-height: 520px;
+        opacity: 1;
+        visibility: visible;
+        padding-bottom: 16px;
+      }
+      .nav-links a {
+        padding: 14px 0;
+        border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+        font-size: 0.9rem;
+        display: block;
+      }
+      .nav-links a.nav-cta {
+        margin: 16px 0;
+        text-align: center;
+      }
+      .nav-toggle.is-active span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+      .nav-toggle.is-active span:nth-child(2) { opacity: 0; }
+      .nav-toggle.is-active span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+
+      .gallery-page-section { padding: 40px 0 70px; }
+      .lawn-gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
     }
-    @media (max-width: 580px) {
-      .lawn-gallery-grid {
-        grid-template-columns: 1fr;
-        gap: 12px;
-      }
+
+    /* Mobile Responsive */
+    @media (max-width: 767px) {
+      .container { padding: 0 16px; }
+      .gallery-header { margin-bottom: 22px; }
+      .gallery-heading { font-size: 1.5rem; }
+      .gallery-subtext { font-size: 0.85rem; line-height: 1.5; }
+
       .gallery-filters {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
         gap: 8px;
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+        scrollbar-width: none;
       }
+      .gallery-filters::-webkit-scrollbar { display: none; }
+
+      .filter-btn {
+        white-space: nowrap;
+        flex-shrink: 0;
+        padding: 8px 14px;
+        font-size: 0.72rem;
+      }
+
+      .lawn-gallery-grid { grid-template-columns: 1fr; gap: 14px; }
+      .lawn-gallery-card { aspect-ratio: 16 / 10; border-radius: 4px; }
+      .lawn-gallery-card .card-hover-tag {
+        opacity: 1;
+        transform: translateY(0);
+        font-size: 0.65rem;
+        padding: 4px 8px;
+      }
+
+      .lightbox-modal { padding: 16px; }
+      .lightbox-content { max-width: 100%; width: 100%; }
+      .lightbox-img { max-height: 65vh; border-radius: 4px; }
+      .lightbox-caption { font-size: 0.78rem; margin-top: 10px; }
+      .lightbox-close { top: -36px; right: 4px; font-size: 1.8rem; }
     }
-
-    /* =========================================================
-   GALLERY PAGE - MOBILE & TABLET RESPONSIVE SYSTEM
-   ========================================================= */
-
-/* Tablet Optimization (Max 992px) */
-@media (max-width: 992px) {
-  .nav {
-    padding: 14px 20px;
-  }
-
-  .nav-links {
-    gap: 16px;
-  }
-
-  .gallery-page-section {
-    padding: 40px 0 70px;
-  }
-
-  .lawn-gallery-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 14px;
-  }
-}
-
-/* Mobile Devices (Max 767px) */
-@media (max-width: 767px) {
-  .topbar {
-    display: none !important;
-  }
-
-  .container {
-    padding: 0 16px;
-  }
-
-  .gallery-header {
-    margin-bottom: 22px;
-  }
-
-  .gallery-heading {
-    font-size: 1.5rem;
-  }
-
-  .gallery-subtext {
-    font-size: 0.85rem;
-    line-height: 1.5;
-  }
-
-  /* Horizontal swipeable pill filter on mobile */
-  .gallery-filters {
-    display: flex;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    gap: 8px;
-    padding-bottom: 10px;
-    margin-bottom: 20px;
-    scrollbar-width: none; /* Hide scrollbar for Firefox */
-  }
-
-  .gallery-filters::-webkit-scrollbar {
-    display: none; /* Hide scrollbar for Chrome/Safari */
-  }
-
-  .filter-btn {
-    white-space: nowrap;
-    flex-shrink: 0;
-    padding: 8px 14px;
-    font-size: 0.72rem;
-  }
-
-  /* Single Column Card Stack */
-  .lawn-gallery-grid {
-    grid-template-columns: 1fr;
-    gap: 14px;
-  }
-
-  .lawn-gallery-card {
-    aspect-ratio: 16 / 10;
-    border-radius: 4px;
-  }
-
-  /* Always show image category tag on touch screens */
-  .lawn-gallery-card .card-hover-tag {
-    opacity: 1;
-    transform: translateY(0);
-    font-size: 0.65rem;
-    padding: 4px 8px;
-  }
-
-  /* Mobile Lightbox Modal */
-  .lightbox-modal {
-    padding: 16px;
-  }
-
-  .lightbox-content {
-    max-width: 100%;
-    width: 100%;
-  }
-
-  .lightbox-img {
-    max-height: 65vh;
-    border-radius: 4px;
-  }
-
-  .lightbox-caption {
-    font-size: 0.78rem;
-    margin-top: 10px;
-  }
-
-  .lightbox-close {
-    top: -36px;
-    right: 4px;
-    font-size: 1.8rem;
-  }
-}
   </style>
 </head>
 <body>
 
-  <!-- Top announcement bar -->
+  <!-- Top Announcement Bar -->
   <div class="topbar">
     <div class="topbar-inner">
       <div class="topbar-left">
@@ -452,110 +433,184 @@
       </div>
       <div class="topbar-right">
         <a href="tel:+918762191107">📞 +91 8762191107</a>
-        <a href="mailto: nationalswing@gmail.com">✉ nationalswing@gmail.com</a>
+        <a href="mailto:nationalswing@gmail.com">✉ nationalswing@gmail.com</a>
       </div>
     </div>
   </div>
 
-  <!-- Header / Nav -->
+  <!-- Header / Navigation -->
   <header class="site-header">
-  <nav class="nav">
-    <a href="index.html" class="brand">
-      <img src="assets/images/logo.png" alt="NSW Logo" width="50" height="50">
-      <div class="brand-text">
-        <span class="brand-name">NATIONAL SECURITY WING</span>
-        <span class="brand-tag">Guard · Protect · Secure</span>
+    <nav class="nav">
+      <a href="index.html" class="brand">
+        <div class="brand-mark">
+          <img src="assets/images/logo.png" alt="NSW Logo" onerror="this.style.display='none'">
+        </div>
+        <div class="brand-text">
+          <span class="brand-name">NATIONAL SECURITY WING</span>
+          <span class="brand-tag">Guard · Protect · Secure</span>
+        </div>
+      </a>
+
+      <!-- Mobile Hamburger Button -->
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <!-- Navigation Links -->
+      <div class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="industries.html">Industries</a>
+        <a href="training.html">Training</a>
+        <a href="certifications.html">Certifications</a>
+        <a href="clients.html">Clients</a>
+        <a href="gallery.html" class="active">Gallery</a>
+        <a href="contact.html" class="nav-cta">Get a Quote</a>
       </div>
-    </a>
-
-    <!-- Hamburger Button -->
-    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
-
-    <!-- Navigation Links -->
-    <div class="nav-links" id="navLinks">
-      <a href="index.html">Home</a>
-      <a href="about.html">About</a>
-      <a href="services.html">Services</a>
-      <a href="industries.html">Industries</a>
-      <a href="training.html">Training</a>
-      <a href="certifications.html">Certifications</a>
-      <a href="clients.html">Clients</a>
-      <a href="gallery.html">Gallery</a>
-      <a href="contact.html" class="nav-cta">Get a Quote</a>
-    </div>
-  </nav>
-</header>
+    </nav>
+  </header>
 
   <!-- Gallery Section -->
   <main class="gallery-page-section">
     <div class="container">
       <div class="gallery-header">
-        <h1 class="gallery-heading">Gallery Section</h1>
-        <p class="gallery-subtext">Visual references loaded dynamically from database categorization parameters.</p>
+        <h1 class="gallery-heading">Operational Deployments</h1>
+        <p class="gallery-subtext">Visual records of active security details, specialized units, client operations, and training regimes.</p>
       </div>
 
-      <!-- Filter Controls -->
+      <!-- Security Category Filter Controls -->
       <div class="gallery-filters">
-        <button class="filter-btn active" data-filter="all">All Records</button>
-        <button class="filter-btn" data-filter="event">Stage & Decor</button>
-        <button class="filter-btn" data-filter="facility">Facilities & Suites</button>
-        <button class="filter-btn" data-filter="lawn">Open Lawn Setup</button>
-        <button class="filter-btn" data-filter="night">Night Ambiance</button>
+        <button class="filter-btn active" data-filter="all">All Deployments</button>
+        <button class="filter-btn" data-filter="static-guarding">Armed & Static Guarding</buttosn>
+        <button class="filter-btn" data-filter="vip-escort">Executive & VIP Protection</button>
+        <button class="filter-btn" data-filter="industrial">Industrial & Facility Security</button>
+        <button class="filter-btn" data-filter="healthcare">Healthcare & Hospital Safety</button>
+        <button class="filter-btn" data-filter="retail-bullion">Weapons & Retail Security</button>
+        <button class="filter-btn" data-filter="hospitality">Hospitality & Event Bouncers</button>
+        <button class="filter-btn" data-filter="training-drills">Drills & Combat Training</button>
+        <button class="filter-btn" data-filter="patrol-surveillance">Night Patrol & Surveillance</button>
+        <button class="filter-btn" data-filter="ceremonial">Ceremonial & Honours</button>
       </div>
 
       <!-- 3-Column Image Grid -->
       <div class="lawn-gallery-grid" id="galleryGrid">
         
-        <!-- Row 1 -->
-        <div class="lawn-gallery-card" data-category="event" data-caption="Traditional Ceremonial Mandap & Floral Stage">
-          <img src="assets/images/gallery/lawn-1.png" alt="Traditional Ceremonial Mandap" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1519741497674-611481863552?w=800&q=80'">
-          <span class="card-hover-tag">Stage & Decor</span>
+        <!-- 1. Static Guarding -->
+        <div class="lawn-gallery-card" data-category="static-guarding" data-caption="Corporate Sentry Guard & Lobby Access Checkpost">
+          <img src="assets/images/gallery/guard1.jpeg" alt="Corporate Static Guarding" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1541872703-74c5e44368f9?w=800&q=80'">
+          <span class="card-hover-tag">Fire Protection</span>
+        </div>
+        <div class="lawn-gallery-card" data-category="static-guarding" data-caption="Corporate Sentry Guard & Lobby Access Checkpost">
+          <img src="assets/images/gallery/guard2.jpeg" alt="Corporate Static Guarding" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1541872703-74c5e44368f9?w=800&q=80'">
+          <span class="card-hover-tag">Life Safety</span>
+        </div>
+        <div class="lawn-gallery-card" data-category="static-guarding" data-caption="Corporate Sentry Guard & Lobby Access Checkpost">
+          <img src="assets/images/gallery/Guard3.jpeg" alt="Corporate Static Guarding" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1541872703-74c5e44368f9?w=800&q=80'">
+          <span class="card-hover-tag">VIP Checking</span>
         </div>
 
-        <div class="lawn-gallery-card" data-category="lawn" data-caption="Illuminated Evening Banquet Seating">
-          <img src="assets/images/gallery/lawn-2.png" alt="Open Lawn Evening Seating" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&q=80'">
-          <span class="card-hover-tag">Open Lawn Setup</span>
+        <!-- 2. VIP Escort -->
+        <div class="lawn-gallery-card" data-category="vip-escort" data-caption="VIP Close Protection & Convoy Escort Detail">
+          <img src="assets/images/gallery/VIP1.jpeg" alt="VIP Protection Detail" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1508873696983-2df5293cb32f?w=800&q=80'">
+          <span class="card-hover-tag">VIP Escort</span>
+        </div>
+        <div class="lawn-gallery-card" data-category="vip-escort" data-caption="VIP Close Protection & Convoy Escort Detail">
+          <img src="assets/images/gallery/VIP2.jpeg" alt="VIP Protection Detail" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1508873696983-2df5293cb32f?w=800&q=80'">
+          <span class="card-hover-tag">VIP Escort</span>
+        </div>
+        <div class="lawn-gallery-card" data-category="vip-escort" data-caption="VIP Close Protection & Convoy Escort Detail">
+          <img src="assets/images/gallery/VIP3.jpeg" alt="VIP Protection Detail" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1508873696983-2df5293cb32f?w=800&q=80'">
+          <span class="card-hover-tag">VIP Escort</span>
+        </div>
+        <div class="lawn-gallery-card" data-category="vip-escort" data-caption="VIP Close Protection & Convoy Escort Detail">
+          <img src="assets/images/gallery/VIP4.jpeg" alt="VIP Protection Detail" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1508873696983-2df5293cb32f?w=800&q=80'">
+          <span class="card-hover-tag">VIP Escort</span>
         </div>
 
-        <div class="lawn-gallery-card" data-category="facility" data-caption="Executive Restroom & Dressing Suites">
-          <img src="assets/images/gallery/lawn-3.png" alt="Executive Dressing Suite" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=800&q=80'">
-          <span class="card-hover-tag">Facilities</span>
+        <!-- 3. Industrial -->
+        <div class="lawn-gallery-card" data-category="industrial" data-caption="Heavy Industry Logistics Checkpoint & Mining Perimeter Control">
+          <img src="assets/images/gallery/industrial-patrol.png" alt="Industrial Logistics Security" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=800&q=80'">
+          <span class="card-hover-tag">Industrial Facility</span>
         </div>
 
-        <!-- Row 2 -->
-        <div class="lawn-gallery-card" data-category="facility" data-caption="Architectural Indoor Banquet Hallway">
-          <img src="assets/images/gallery/lawn-4.png" alt="Indoor Banquet Hallway" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=800&q=80'">
-          <span class="card-hover-tag">Banquet Hall</span>
+
+        <!-- 4. Healthcare -->
+        <div class="lawn-gallery-card" data-category="healthcare" data-caption="KLE JGMMC Hospital 24/7 Emergency Ward Crowd Regulation">
+          <img src="assets/images/gallery/hospital-security.png" alt="Hospital Emergency Security" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=800&q=80'">
+          <span class="card-hover-tag">Healthcare Safety</span>
         </div>
 
-        <div class="lawn-gallery-card" data-category="facility" data-caption="Guest Suite Accommodation">
-          <img src="assets/images/gallery/lawn-5.png" alt="Guest Bedroom Suite" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1590490360182-c33d57733427?w=800&q=80'">
-          <span class="card-hover-tag">Suites</span>
+        <!-- 5. Retail Bullion -->
+        <div class="lawn-gallery-card" data-category="retail-bullion" data-caption="Seema Gold Showroom Vault Custody & Armed Transit Security">
+          <img src="assets/images/gallery/Weapon1.jpeg" alt="Jewellery Showroom Armed Security" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?w=800&q=80'">
+          <span class="card-hover-tag">Weapons & Retail</span>
+        </div>
+        <div class="lawn-gallery-card" data-category="retail-bullion" data-caption="Seema Gold Showroom Vault Custody & Armed Transit Security">
+          <img src="assets/images/gallery/Weapon2.jpeg" alt="Jewellery Showroom Armed Security" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1579783900882-c0d3dad7b119?w=800&q=80'">
+          <span class="card-hover-tag">Weapons & Retail</span>
         </div>
 
-        <div class="lawn-gallery-card" data-category="event" data-caption="Grand Reception Stage & Light Decor">
-          <img src="assets/images/gallery/lawn-6.png" alt="Grand Reception Stage" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1511795409834-ef04bbd61622?w=800&q=80'">
-          <span class="card-hover-tag">Stage Decor</span>
+        <!-- 6. Hospitality -->
+        <div class="lawn-gallery-card" data-category="hospitality" data-caption="Jetlag & Royal Athithiya Event Bouncers & Conflict De-escalation">
+          <img src="assets/images/gallery/hospitality-bouncers.png" alt="Event & Lounge Bouncer Team" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=800&q=80'">
+          <span class="card-hover-tag">Hospitality Bouncers</span>
         </div>
 
-        <!-- Row 3 -->
-        <div class="lawn-gallery-card" data-category="night" data-caption="Front Facade Night Elevation">
-          <img src="assets/images/gallery/lawn-7.png" alt="Front Facade Night Elevation" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1545232979-fbf6c61f2f01?w=800&q=80'">
-          <span class="card-hover-tag">Night View</span>
+        <!-- 7. Training Drills -->
+        <div class="lawn-gallery-card" data-category="training-drills" data-caption="Tactical Unarmed Combat & Physical Obstacle Drill Training">
+          <img src="assets/images/gallery/td1.jpeg" alt="Combat Training Session" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=800&q=80'">
+          <span class="card-hover-tag">Combat Drills</span>
+        </div>
+        <div class="lawn-gallery-card" data-category="training-drills" data-caption="Tactical Unarmed Combat & Physical Obstacle Drill Training">
+          <img src="assets/images/gallery/td2.jpeg" alt="Combat Training Session" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=800&q=80'">
+          <span class="card-hover-tag">Combat Drills</span>
+        </div>
+        <div class="lawn-gallery-card" data-category="training-drills" data-caption="Tactical Unarmed Combat & Physical Obstacle Drill Training">
+          <img src="assets/images/gallery/td3.jpeg" alt="Combat Training Session" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=800&q=80'">
+          <span class="card-hover-tag">Combat Drills</span>
+        </div>
+        <div class="lawn-gallery-card" data-category="training-drills" data-caption="Tactical Unarmed Combat & Physical Obstacle Drill Training">
+          <img src="assets/images/gallery/td4.jpeg" alt="Combat Training Session" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=800&q=80'">
+          <span class="card-hover-tag">Combat Drills</span>
+        </div>
+        <div class="lawn-gallery-card" data-category="training-drills" data-caption="Tactical Unarmed Combat & Physical Obstacle Drill Training">
+          <img src="assets/images/gallery/td5.jpeg" alt="Combat Training Session" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=800&q=80'">
+          <span class="card-hover-tag">Combat Drills</span>
+        </div>
+        <div class="lawn-gallery-card" data-category="training-drills" data-caption="Tactical Unarmed Combat & Physical Obstacle Drill Training">
+          <img src="assets/images/gallery/td6.jpeg" alt="Combat Training Session" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=800&q=80'">
+          <span class="card-hover-tag">Combat Drills</span>
+        </div>
+        <div class="lawn-gallery-card" data-category="training-drills" data-caption="Tactical Unarmed Combat & Physical Obstacle Drill Training">
+          <img src="assets/images/gallery/td7.jpeg" alt="Combat Training Session" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1517838277536-f5f99be501cd?w=800&q=80'">
+          <span class="card-hover-tag">Combat Drills</span>
         </div>
 
-        <div class="lawn-gallery-card" data-category="night" data-caption="Main Stage Outdoor Illumination">
-          <img src="assets/images/gallery/lawn-8.png" alt="Main Stage Outdoor Illumination" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=800&q=80'">
-          <span class="card-hover-tag">Ambiance</span>
+        <!-- 8. Patrol & Surveillance -->
+        <div class="lawn-gallery-card" data-category="patrol-surveillance" data-caption="Night Vision Mobile Patrol & Control Room Surveillance Sweep">
+          <img src="assets/images/gallery/night-patrol.png" alt="Night Patrol Unit" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1509198397868-475647b2a1e5?w=800&q=80'">
+          <span class="card-hover-tag">Patrol & Surveillance</span>
         </div>
 
-        <div class="lawn-gallery-card" data-category="night" data-caption="Perimeter Deck Landscape Lighting">
-          <img src="assets/images/gallery/lawn-9.png" alt="Perimeter Deck Landscape" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1506157786151-b8491531f063?w=800&q=80'">
-          <span class="card-hover-tag">Perimeter</span>
+        <!-- 9. Ceremonial Guard -->
+        <div class="lawn-gallery-card" data-category="ceremonial" data-caption="Independence Day Ceremonial Parade & National Salute Guard">
+          <img src="assets/images/gallery/CH1.jpeg" alt="Ceremonial Parade Formation" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1541872703-74c5e44368f9?w=800&q=80'">
+          <span class="card-hover-tag">Ceremonial Guard</span>
+        </div>
+        <div class="lawn-gallery-card" data-category="ceremonial" data-caption="Independence Day Ceremonial Parade & National Salute Guard">
+          <img src="assets/images/gallery/CH2.jpeg" alt="Ceremonial Parade Formation" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1541872703-74c5e44368f9?w=800&q=80'">
+          <span class="card-hover-tag">Ceremonial Guard</span>
+        </div>
+        <div class="lawn-gallery-card" data-category="ceremonial" data-caption="Independence Day Ceremonial Parade & National Salute Guard">
+          <img src="assets/images/gallery/CH3.jpeg" alt="Ceremonial Parade Formation" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1541872703-74c5e44368f9?w=800&q=80'">
+          <span class="card-hover-tag">Ceremonial Guard</span>
+        </div>
+        <div class="lawn-gallery-card" data-category="ceremonial" data-caption="Independence Day Ceremonial Parade & National Salute Guard">
+          <img src="assets/images/gallery/CH4.jpeg" alt="Ceremonial Parade Formation" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1541872703-74c5e44368f9?w=800&q=80'">
+          <span class="card-hover-tag">Ceremonial Guard</span>
         </div>
 
       </div>
@@ -566,23 +621,44 @@
   <div class="lightbox-modal" id="lightboxModal">
     <div class="lightbox-content">
       <span class="lightbox-close" id="lightboxClose">&times;</span>
-      <img src="" alt="Enlarged View" class="lightbox-img" id="lightboxImg">
+      <img src="" alt="Enlarged Operational View" class="lightbox-img" id="lightboxImg">
       <div class="lightbox-caption" id="lightboxCaption"></div>
     </div>
   </div>
 
-  <!-- Client-Side Interactive Engine -->
+  <!-- Client-Side Engine -->
   <script>
     document.addEventListener("DOMContentLoaded", () => {
+      // 1. Mobile Dropdown Navigation Engine
+      const navToggle = document.getElementById("navToggle");
+      const navLinks = document.getElementById("navLinks");
+
+      if (navToggle && navLinks) {
+        navToggle.addEventListener("click", (e) => {
+          e.stopPropagation();
+          const isOpen = navLinks.classList.toggle("is-open");
+          navToggle.classList.toggle("is-active", isOpen);
+        });
+
+        navLinks.querySelectorAll("a").forEach(link => {
+          link.addEventListener("click", () => {
+            navLinks.classList.remove("is-open");
+            navToggle.classList.remove("is-active");
+          });
+        });
+
+        document.addEventListener("click", (e) => {
+          if (!navToggle.contains(e.target) && !navLinks.contains(e.target)) {
+            navLinks.classList.remove("is-open");
+            navToggle.classList.remove("is-active");
+          }
+        });
+      }
+
+      // 2. Category Filtering Engine
       const filterBtns = document.querySelectorAll(".filter-btn");
       const galleryCards = document.querySelectorAll(".lawn-gallery-card");
-      
-      const modal = document.getElementById("lightboxModal");
-      const modalImg = document.getElementById("lightboxImg");
-      const modalCaption = document.getElementById("lightboxCaption");
-      const modalClose = document.getElementById("lightboxClose");
 
-      // Category Filtering
       filterBtns.forEach(btn => {
         btn.addEventListener("click", () => {
           filterBtns.forEach(b => b.classList.remove("active"));
@@ -600,7 +676,12 @@
         });
       });
 
-      // Lightbox Click Handler
+      // 3. Lightbox Modal Engine
+      const modal = document.getElementById("lightboxModal");
+      const modalImg = document.getElementById("lightboxImg");
+      const modalCaption = document.getElementById("lightboxCaption");
+      const modalClose = document.getElementById("lightboxClose");
+
       galleryCards.forEach(card => {
         card.addEventListener("click", () => {
           const img = card.querySelector("img");
@@ -612,19 +693,20 @@
         });
       });
 
-      // Close Lightbox
       const closeModal = () => {
         modal.classList.remove("active");
         document.body.style.overflow = "";
       };
 
-      modalClose.addEventListener("click", closeModal);
-      modal.addEventListener("click", (e) => {
-        if (e.target === modal) closeModal();
-      });
+      if (modalClose) modalClose.addEventListener("click", closeModal);
+      if (modal) {
+        modal.addEventListener("click", (e) => {
+          if (e.target === modal) closeModal();
+        });
+      }
 
       document.addEventListener("keydown", (e) => {
-        if (e.key === "Escape" && modal.classList.contains("active")) {
+        if (e.key === "Escape" && modal && modal.classList.contains("active")) {
           closeModal();
         }
       });
