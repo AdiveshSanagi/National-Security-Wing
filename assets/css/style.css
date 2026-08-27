@@ -432,71 +432,228 @@ section { padding: 110px 0; position: relative; }
 .divider-emblem .star { color: var(--c-gold); font-size: 1.2rem; }
 
 /* =========================================================
-   SERVICE & CLIENT CARDS
+   SERVICE & CLIENT CARDS — Luxury Military-Precision UI
    ========================================================= */
+
+/* Responsive Modern Grid with Subtle Border Illumination */
 .services-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1px;
-  background: var(--c-line);
-  border: 1px solid var(--c-line);
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+  background: transparent;
+  border: none;
+  padding: 10px 0;
 }
+
+/* Base Card Container */
 .service-card {
-  background: var(--c-jet);
-  padding: 42px 34px;
   position: relative;
-  transition: all .4s ease;
+  background: linear-gradient(160deg, #11141c 0%, #070b12 100%);
+  border: 1px solid rgba(212, 175, 55, 0.16);
+  border-radius: 6px;
+  padding: 44px 34px 38px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
   isolation: isolate;
+  box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.6);
 }
+
+/* Ambient Crimson & Gold Glow on Hover */
 .service-card::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, var(--c-red-glow), transparent 60%);
+  background: radial-gradient(
+    circle at top right,
+    rgba(139, 30, 45, 0.28) 0%,
+    rgba(212, 175, 55, 0.08) 50%,
+    transparent 80%
+  );
   opacity: 0;
-  transition: opacity .4s ease;
+  transition: opacity 0.5s ease;
   z-index: -1;
 }
+
+/* Subtle Top Accent Highlight */
+.service-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--c-gold), transparent);
+  opacity: 0;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  transform: scaleX(0.4);
+}
+
 .service-card:hover {
-  background: #181818;
-  transform: translateY(-4px);
+  transform: translateY(-8px);
+  border-color: rgba(212, 175, 55, 0.45);
+  box-shadow: 0 20px 45px -12px rgba(0, 0, 0, 0.8),
+              0 0 25px rgba(212, 175, 55, 0.12);
 }
-.service-card:hover::before { opacity: 1; }
 
+.service-card:hover::before {
+  opacity: 1;
+}
+
+.service-card:hover::after {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+/* =========================================================
+   CIRCULAR LOGO / ICON BADGE
+   ========================================================= */
 .service-icon {
-  width: 56px; height: 56px;
-  display: grid; place-items: center;
-  border: 1px solid var(--c-gold);
-  margin-bottom: 28px;
-  color: var(--c-gold);
+  width: 78px;
+  height: 78px;
+  border-radius: 50%;
+  border: 1.5px solid var(--c-gold);
+  background: radial-gradient(circle at 35% 35%, #182234 0%, #060d19 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
   position: relative;
+  flex-shrink: 0;
+  padding: 10px;
+  box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.6),
+              0 0 0 4px rgba(212, 175, 55, 0.06);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.service-icon::after {
-  content: ''; position: absolute;
-  inset: 4px;
-  border: 1px solid rgba(212, 175, 55, 0.3);
-}
-.service-icon svg { width: 26px; height: 26px; }
 
-.service-card h3 { margin-bottom: 14px; }
-.service-card p { font-size: 0.95rem; }
+/* Concentric Inner Ring */
+.service-icon::after {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  border-radius: 50%;
+  border: 1px dashed rgba(212, 175, 55, 0.3);
+  pointer-events: none;
+}
+
+/* Logo Image Inside Circle */
+.service-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+  filter: brightness(0.95) contrast(1.05);
+  transition: transform 0.4s ease, filter 0.4s ease;
+}
+
+/* Fallback SVG Icon */
+.service-icon svg {
+  width: 32px;
+  height: 32px;
+  color: var(--c-gold);
+  transition: transform 0.35s ease;
+}
+
+/* Icon Hover Effects */
+.service-card:hover .service-icon {
+  transform: scale(1.06);
+  border-color: #ffffff;
+  box-shadow: 0 10px 28px -4px rgba(212, 175, 55, 0.35),
+              0 0 0 6px rgba(212, 175, 55, 0.12);
+}
+
+.service-card:hover .service-icon img {
+  transform: scale(1.08);
+  filter: brightness(1.1);
+}
+
+.service-card:hover .service-icon svg {
+  transform: scale(1.1);
+}
+
+/* =========================================================
+   CARD TYPOGRAPHY & DETAILS
+   ========================================================= */
+.service-card span[style*="text-transform: uppercase"],
+.service-card .service-category {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 0.72rem !important;
+  letter-spacing: 0.22em !important;
+  text-transform: uppercase;
+  color: var(--c-gold) !important;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.service-card h3 {
+  font-size: 1.35rem;
+  color: var(--c-white);
+  line-height: 1.3;
+  margin-bottom: 12px;
+  transition: color 0.3s ease;
+}
+
+.service-card:hover h3 {
+  color: #fff;
+  text-shadow: 0 0 12px rgba(255, 255, 255, 0.2);
+}
+
+.service-card p {
+  font-size: 0.94rem;
+  color: var(--c-mist);
+  line-height: 1.65;
+  margin-top: 4px;
+}
+
+/* Interactive CTA Link */
 .service-card .read-more {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  margin-top: 22px;
+  margin-top: auto;
+  padding-top: 22px;
   font-size: 0.78rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--c-gold);
-  font-weight: 600;
+  font-weight: 700;
+  transition: color 0.3s ease;
 }
+
 .service-card .read-more::after {
   content: '→';
-  transition: transform .3s ease;
+  transition: transform 0.3s ease;
 }
-.service-card:hover .read-more::after { transform: translateX(6px); }
 
+.service-card:hover .read-more {
+  color: #ffffff;
+}
+
+.service-card:hover .read-more::after {
+  transform: translateX(6px);
+}
+
+/* Tablet & Mobile Adjustments */
+@media (max-width: 768px) {
+  .services-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .service-card {
+    padding: 32px 24px 28px;
+  }
+
+  .service-icon {
+    width: 68px;
+    height: 68px;
+    margin-bottom: 18px;
+  }
+}
 /* =========================================================
    WHY CHOOSE US & STATS
    ========================================================= */
